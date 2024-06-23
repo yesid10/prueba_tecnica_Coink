@@ -26,11 +26,14 @@ export class RegisterPage implements OnInit {
 
 
   registerForm!: FormGroup;
+  alertButtons = ['Action'];
+  documentTypes: Array<any> = [];
 
   constructor(
     private fb: FormBuilder, 
     private router: Router, 
-    private apiCoinkService: ApiCoinkService)
+    private apiCoinkService: ApiCoinkService
+    )
     {}
 
   ngOnInit() {
@@ -48,21 +51,23 @@ export class RegisterPage implements OnInit {
       validator: [this.mustMatch('correoElectronico', 'confirmarCorreo'), 
       this.mustMatch('pinSeguridad', 'confirmarPinSeguridad')]
     });
-    //Peticion a la api cuando se renderixa la pagina
-    // this.apiCoinkService.getDocumentTypes().subscribe(data => {
-    //   console.log('Datos de documentos de indentidad',data);
-    // })
-    // this.apiCoinkService.getGenders().subscribe(data => {
-    //   console.log( 'Datos de genero',data)
-    // })
+
+
+
+    //Peticion a la api cuando se renderiza la pagina
+    this.apiCoinkService.getDocumentTypes().subscribe(data => {
+      this.documentTypes = data;
+      console.log('Datos de documentos de indentidad',data);
+    })
+    this.apiCoinkService.getGenders().subscribe(data => {
+      console.log( 'Datos de genero',data)
+    })
   }
 
   onSubmit() {
     if (this.registerForm.valid) {
-      // Aquí puedes enviar los datos del formulario a tu servicio o realizar alguna acción
       console.log('Formulario válido', this.registerForm.value);
     } else {
-      // Marcar todos los campos como tocados para mostrar mensajes de error si el formulario no es válido
       this.markFormGroupTouched(this.registerForm);
     }
   }

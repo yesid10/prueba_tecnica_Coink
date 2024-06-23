@@ -1,19 +1,74 @@
-ion-icon{
-    color: #1EEB00;
+ion-icon {
+  color: #1EEB00;
+}
+.container {
+  padding: 20px;
+}
+
+ion-title {
+  color: #004B40;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.icon_Oink {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  justify-content: center;
+  gap: 2rem;
 }
 
 p{
-    color: #004B40;
-    font-size: 18px;
-    display: flex;
-    font-weight: bold;
+  font-family: 'Avenir LT Pro', sans-serif;
+  color: #757575;
+  font-size: 18px;
+
 }
-i{
+
+span {
+  display: flex;
+  width: 100%;
+  height: 2%;
+  padding-top: .1rem;
+  background-color: #1EEB00;
   margin-bottom: 2rem;
 }
 
-ion-buttons{
-  display: flex;
-  flex-direction: column;
+h4{
+  color: #004B40;
+  font-size: 16px;
+  font-weight: bold;
 }
+.info{
+  display: flex;
+  color: #004B40;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 1rem;
+}
+form{
+  font-family: 'Avenir LT Pro', sans-serif;
+  color: #AAAAAA;
+  font-size: 18px;
+}
+
+label{
+  color: #FF0000;
+  font-size: 14px;
+  font-family: 'Avenir LT Pro', sans-serif;
+}
+button{
+  display: flex;
+  width: 100%;
+  margin-top: 2rem;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 1rem 5rem;
+  border-radius: 100px;
+  box-shadow: #1EEA004D 0px 3px 8px;
+}
+
 
