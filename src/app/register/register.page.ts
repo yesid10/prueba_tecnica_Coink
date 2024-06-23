@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ApiCoinkService } from '../service/api-coink.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { IonDatetime } from '@ionic/angular/standalone';
+import { NavigationMenuComponent } from '../Components/navigation-menu/navigation-menu.component';
+
 
 @Component({
   selector: 'app-register',
@@ -15,7 +17,8 @@ import { IonDatetime } from '@ionic/angular/standalone';
     CommonModule, 
     FormsModule, 
     IonicModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, 
+    RouterLink
   ]
 })
 export class RegisterPage implements OnInit {

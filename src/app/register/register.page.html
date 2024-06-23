@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>DATOS DE CUENTA</ion-title>
+    <ion-buttons slot="start">
+      <ion-button  [routerLink] = "['/ingreso']">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
+ 
 </ion-header>
-
+<!-- <div>
+  <app-navigation-menu currentPage="registro"></app-navigation-menu>
+</div> -->
 <ion-content>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     
@@ -107,7 +115,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-input formControlName="pinSeguridad" type="password" label="PIN de seguridad" labelPlacement="floating">
+      <ion-input formControlName="pinSeguridad" type="number" label="PIN de seguridad" labelPlacement="floating" placeholder="PIN de seguridad">
         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
       </ion-input>
     </ion-item>
@@ -116,7 +124,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-input formControlName="confirmarPinSeguridad" type="password" label="Confirmar PIN de seguridad" labelPlacement="floating">
+      <ion-input formControlName="confirmarPinSeguridad" type="number" label="Confirmar PIN de seguridad" labelPlacement="floating" placeholder="Confirmar PIN de seguridad">
         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
       </ion-input>
     </ion-item>

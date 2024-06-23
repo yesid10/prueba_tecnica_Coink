@@ -1,4 +1,4 @@
-ion-back-button{
+ion-icon{
     color: #1EEB00;
 }
 
@@ -9,3 +9,20 @@ p{
     font-weight: bold;
 }
 
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+  }
+  
+  .line {
+    height: 2px;
+    width: 60px;
+    background-color: var(--ion-color-success);
+    margin: 0 10px;
+  }
+  
+  ion-icon {
+    font-size: 24px;
+  }
