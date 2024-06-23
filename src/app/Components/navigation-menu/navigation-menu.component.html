@@ -10,4 +10,11 @@
   'display': currentPage=== 'registro' ? 'block' : 'none'}"></button>
     <!-- <ion-icon name="document-text-outline"></ion-icon> -->
   </button>
+
+  <span></span>
+  <button  [routerLink]="['/contrato']"  [ngStyle]="{'border': currentPage === 'contrato' ? '2.1px solid #1EEB00' : '2.1px solid #757575'}">
+    <button class="interno"  [ngStyle]="{'background-color': currentPage === 'contrato' ? '#1EEB00' : '#757575',
+  'display': currentPage=== 'contrato' ? 'block' : 'none' }"></button>
+    <!-- <ion-icon name="document-text-outline"></ion-icon> -->
+  </button>
 </div>

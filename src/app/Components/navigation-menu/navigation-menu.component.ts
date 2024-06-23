@@ -11,7 +11,7 @@ import { IonicModule } from '@ionic/angular';
   imports: [IonicModule, CommonModule, RouterLink]
 })
 export class NavigationMenuComponent  implements OnInit {
-  @Input() currentPage!: 'telefono' | 'registro';
+  @Input() currentPage!: 'telefono' | 'registro' | 'contrato';
 
   constructor() { }
 

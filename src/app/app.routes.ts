@@ -22,6 +22,10 @@ export const routes: Routes = [
     path: 'telefono',
     loadComponent: () => import('./telefono/telefono.page').then( m => m.TelefonoPage)
   },
+  {
+    path: 'contrato',
+    loadComponent: () => import('./contrato/contrato.page').then( m => m.ContratoPage)
+  },
   
   
 ];

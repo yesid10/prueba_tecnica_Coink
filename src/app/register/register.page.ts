@@ -66,6 +66,7 @@ export class RegisterPage implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      this.router.navigate(['/contrato'])
       console.log('Formulario válido', this.registerForm.value);
     } else {
       this.markFormGroupTouched(this.registerForm);

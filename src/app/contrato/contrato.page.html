@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar slot="start">
+    <ion-title>DATOS DE CUENTA</ion-title>
+    <ion-buttons slot="start">
+      <ion-button  [routerLink]="['/telefono']">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <app-navigation-menu currentPage="contrato"></app-navigation-menu>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="icon_Oink">
+      <img src="../../assets/icon/OinkPolicia.svg" class="logo" alt="Logo" />
+      <div>
+        <h4>
+          ESTAS MUY CERCA DE SER PARTE DE COINK.
+        </h4>
+        <p>Solo es necesario que leas detenidamente el contrato que se encuentra al final de esta pantalla y lo aceptes.
+        </p>
+      </div>
+
+    </div>
+    <span></span>
+    <div class="info">LO MÁS IMPORTANTE</div>
+    <p>Para la apertura del Depósito de Bajo Monto en COINK debes ser una persona natural que de acuerdo con nuestra
+      legislación vigente te encuentres en plena capacidad para adquirir derechos y contraer obligaciones.
+
+      <br>
+      <br>
+
+      Abrirás una cuenta COINK de Bajo Monto la cual te permitirá tener un saldo hasta por 8 salarios mínimos en el mes
+      y realizar
+      débitos por el mismo valor. Si deseas sobrepasar estos límites debes solicitarnos la apertura de un Depósito
+      Ordinario COINK Persona Natural.
+
+      <br>
+      <br>
+
+      Solo puedes tener una cuenta COINK de Bajo Monto y podrás utilizar tu dispositivo
+      móvil para consultar tu saldo, tus movimientos, realizar tus transacciones y administrar tu cuenta.
+
+      <br>
+      <br>
+      Recuerda que no necesitas saldo mínimo ni monto inicial para su apertura.
+    </p>
+
+    <div class="infoContrato">Lee tu contrato</div>
+    <div class="check">
+      <ion-checkbox class="checked" (ionChange)="onChangeCheckInput()" color="success"></ion-checkbox>
+      <p>He leído ya acepto el contrato</p>
+    </div>
+
+    <button type="submit" [disabled]="!checkedInput" [ngStyle]="{'background-color': checkedInput === true ? '#1EEB00' : '#EEEEEE',
+    'color': checkedInput === true ? '#004B40' : '#757575'}"
+    [routerLink]="['/final']"
+    >SIGUIENTE</button>
+
+  </div>
+
+</ion-content>
