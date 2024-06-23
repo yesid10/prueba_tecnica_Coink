@@ -18,7 +18,8 @@ import { NavigationMenuComponent } from '../Components/navigation-menu/navigatio
     FormsModule, 
     IonicModule,
     ReactiveFormsModule, 
-    RouterLink
+    RouterLink,
+    NavigationMenuComponent
   ]
 })
 export class RegisterPage implements OnInit {

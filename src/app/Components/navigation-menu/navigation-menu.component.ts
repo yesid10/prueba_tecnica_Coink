@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -8,16 +8,15 @@ import { IonicModule } from '@ionic/angular';
   templateUrl: './navigation-menu.component.html',
   styleUrls: ['./navigation-menu.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule, RouterLink]
 })
 export class NavigationMenuComponent  implements OnInit {
-  @Input() currentPage!: 'telefono';
-  constructor( private router: Router) { }
+  @Input() currentPage!: 'telefono' | 'registro';
+
+  constructor() { }
 
   ngOnInit() {}
 
-  navigateTo(page: string){
-    this.router.navigate([`/${page}`])
-  }
+
 
 }

@@ -1,8 +1,13 @@
 <div class="navigation-menu">
-  <ion-button [color]="currentPage === 'telefono' ? 'success' : 'medium'" (click)="navigateTo('phone')">
-    <ion-icon name="arrow-back-outline"></ion-icon>
-  </ion-button>
-  <ion-button [color]="currentPage === 'resgistro' ? 'success' : 'medium'" (click)="navigateTo('register')">
-    <ion-icon name="document-text-outline"></ion-icon>
-  </ion-button>
+  <button  [routerLink]="['/telefono']"  [ngStyle]="{'border': currentPage === 'telefono' ? '2.1px solid #1EEB00' : '2.1px solid #757575'}">
+    <button class="interno" [ngStyle]="{'background-color': currentPage === 'telefono' ? '#1EEB00' : '#757575',
+    'display': currentPage=== 'telefono' ? 'block' : 'none'} "></button>
+    <!-- <ion-icon name="arrow-back-outline"></ion-icon> -->
+  </button>
+  <span></span>
+  <button  [routerLink]="['/register']"  [ngStyle]="{'border': currentPage === 'registro' ? '2.1px solid #1EEB00' : '2.1px solid #757575'}">
+    <button class="interno"  [ngStyle]="{'background-color': currentPage === 'registro' ? '#1EEB00' : '#757575',
+  'display': currentPage=== 'registro' ? 'block' : 'none'}"></button>
+    <!-- <ion-icon name="document-text-outline"></ion-icon> -->
+  </button>
 </div>

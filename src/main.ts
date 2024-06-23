@@ -8,7 +8,7 @@ import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { provideHttpClient } from '@angular/common/http';
 import { addIcons } from 'ionicons';
-import {  arrowBackOutline, chevronBackOutline, documentTextOutline } from 'ionicons/icons';
+import {  arrowBackOutline, backspaceOutline, checkmarkOutline, chevronBackOutline, documentTextOutline } from 'ionicons/icons';
 
 
 if (environment.production) {
@@ -19,6 +19,9 @@ addIcons({
   'chevron-back-outline': chevronBackOutline,
   'arrow-back-outline': arrowBackOutline,
   'document-text-outline': documentTextOutline,
+  'backspace-outline': backspaceOutline,
+  'checkmark-outline': checkmarkOutline,
+
 });
 
 bootstrapApplication(AppComponent, {

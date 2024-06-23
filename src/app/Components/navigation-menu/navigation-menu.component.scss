@@ -1,14 +1,32 @@
 .navigation-menu {
     display: flex;
-    justify-content: space-around;
+    gap: .5rem;
+    justify-content: center;
     align-items: center;
-  
-    ion-button {
-      --background: transparent;
+
+    span{
+      display: flex;
+      padding: .05rem 1rem;
+      background-color: #757575;
+      border-radius: 50%;
     }
   
-    ion-icon {
-      font-size: 24px;
+  
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+    }
+
+    .interno{
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+  
     }
   }
   
