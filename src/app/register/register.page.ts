@@ -41,10 +41,10 @@ export class RegisterPage implements OnInit {
     this.loadData();
   }
   async loadData(){
-    const loading = await this.loadingController.create({
-      message: 'Cargando datos...'
-    });
-    await loading.present();
+    // const loading = await this.loadingController.create({
+    //   message: 'Cargando datos...'
+    // });
+    // await loading.present();
 
     this.route.queryParams.subscribe(params =>{
       this.phoneNumber = params['phoneNumber'] || '';
@@ -63,9 +63,9 @@ export class RegisterPage implements OnInit {
       this.initForm();
     } catch (error) {
       console.error('Error cargando datos', JSON.stringify(error));
-      await this.presentToast('Error al cargar los datos. Por favor, intenta de nuevo.');
+      // await this.presentToast('Error al cargar los datos. Por favor, intenta de nuevo.');
     } finally {
-      loading.dismiss();
+      // loading.dismiss();
     }
   }
 
@@ -96,7 +96,7 @@ export class RegisterPage implements OnInit {
       console.log('Datos Usuario: ', dataComplete);
     } else {
       this.markFormGroupTouched(this.registerForm);
-      this.presentToast('Por favor, completa todos los campos correctamente.');
+      // this.presentToast('Por favor, completa todos los campos correctamente.');
     }
   }
 
@@ -125,12 +125,12 @@ export class RegisterPage implements OnInit {
     };
   }
 
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 3000,
-      position: 'bottom'
-    });
-    toast.present();
-  }
+  // async presentToast(message: string) {
+  //   const toast = await this.toastController.create({
+  //     message: message,
+  //     duration: 3000,
+  //     position: 'bottom'
+  //   });
+  //   toast.present();
+  // }
 }
