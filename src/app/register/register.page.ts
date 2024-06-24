@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
@@ -29,6 +27,7 @@ export class RegisterPage implements OnInit {
   documentTypes: Array<any> = [];
   genders: Array<any> = [];
   phoneNumber!: '';
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder, 
@@ -40,25 +39,27 @@ export class RegisterPage implements OnInit {
   ) {this.initForm();}
 
   async ngOnInit() {
-    await this.loadData();
+    this.loadData();
   }
 
-  async loadData() {
-    const loading = await this.loadingController.create({
-      message: 'Cargando datos...'
-    });
+  // onLoadDataClick(){
+  //   this.loadData();
+  // }
+  async loadData(){
+    // const loading = await this.loadingController.create({
+    //   message: 'Cargando datos...'
+    // });
+    // await loading.present();
+    this.isLoading=true;
+    this.documentTypes=[];
+
+    this.route.queryParams.subscribe(params =>{
+      this.phoneNumber = params['phoneNumber'] || '';
+    })
 
     try {
-      await loading.present();
-
-      this.route.queryParams.subscribe(params => {
-        this.phoneNumber = params['phoneNumber'] || '';
-      });
-
-      const [documentTypes, genders] = await Promise.all([
-        lastValueFrom(this.apiCoinkService.getDocumentTypes()),
-        lastValueFrom(this.apiCoinkService.getGenders())
-      ]);
+      const documentTypes = await lastValueFrom(this.apiCoinkService.getDocumentTypes())
+      const genders = await lastValueFrom(this.apiCoinkService.getGenders());
 
       this.documentTypes = documentTypes;
       this.genders = genders;
@@ -69,9 +70,10 @@ export class RegisterPage implements OnInit {
       this.initForm();
     } catch (error) {
       console.error('Error cargando datos', JSON.stringify(error));
-      await this.presentToast('Error al cargar los datos. Por favor, intenta de nuevo.');
+      // await this.presentToast('Error al cargar los datos. Por favor, intenta de nuevo.');
     } finally {
-      await loading.dismiss();
+      // loading.dismiss();
+      this.isLoading=false;
     }
   }
 
@@ -92,17 +94,17 @@ export class RegisterPage implements OnInit {
     });
   }
 
-  async onSubmit() {
+  onSubmit() {
     if (this.registerForm.valid) {
-      const dataComplete = {
+      const dataComplete ={
         ...this.registerForm.value,
         NumTelefono: this.phoneNumber
-      };
-      await this.router.navigate(['/contrato']);
+      }
+      this.router.navigate(['/contrato']);
       console.log('Datos Usuario: ', dataComplete);
     } else {
       this.markFormGroupTouched(this.registerForm);
-      await this.presentToast('Por favor, completa todos los campos correctamente.');
+      // this.presentToast('Por favor, completa todos los campos correctamente.');
     }
   }
 
@@ -131,13 +133,12 @@ export class RegisterPage implements OnInit {
     };
   }
 
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 3000,
-      position: 'bottom'
-    });
-    await toast.present();
-    await new Promise(resolve => setTimeout(resolve, 3000));
-  }
+  // async presentToast(message: string) {
+  //   const toast = await this.toastController.create({
+  //     message: message,
+  //     duration: 3000,
+  //     position: 'bottom'
+  //   });
+  //   toast.present();
+  // }
 }

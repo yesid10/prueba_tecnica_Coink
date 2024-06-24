@@ -39,11 +39,15 @@
         </ion-item> -->
         <div class="selects">
           <label for="tipoDocumento">Tipo de documento</label>
-          <select formControlName="tipoDocumento" id="tipoDocumento" placeholder="Tipo de documento">
+          <ion-item *ngIf="isLoading" >
+            <ion-spinner></ion-spinner>
+          </ion-item>
+          <select *ngIf="!isLoading && documentTypes && documentTypes.length>0" formControlName="tipoDocumento" id="tipoDocumento" placeholder="Tipo de documento">
             @for (doc of documentTypes; track doc.id) {
               <option [value]="doc.description">{{doc.description}}</option>
             }
           </select>
+          <ion-spinner *ngIf=""></ion-spinner>
         </div>
         <ion-item
           *ngIf="registerForm.get('tipoDocumento')?.errors?.['required'] && registerForm.get('tipoDocumento')?.touched">
