@@ -50,7 +50,7 @@ Necesitas tener instalados:
 git clone https://github.com/tuusuario/coink-app.git
 cd coink-app
 npm install
-
+```
 Ejecución en el Navegador
 Para ejecutar la aplicación en el navegador, usa:
 
