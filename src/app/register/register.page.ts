@@ -5,6 +5,7 @@ import { IonicModule, LoadingController, ToastController } from '@ionic/angular'
 import { ApiCoinkService } from '../service/api-coink.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavigationMenuComponent } from '../Components/navigation-menu/navigation-menu.component';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -37,7 +38,9 @@ export class RegisterPage implements OnInit {
   ) {this.initForm();}
 
   async ngOnInit() {
-
+    this.loadData();
+  }
+  async loadData(){
     const loading = await this.loadingController.create({
       message: 'Cargando datos...'
     });
@@ -48,8 +51,8 @@ export class RegisterPage implements OnInit {
     })
 
     try {
-      const documentTypes = await this.apiCoinkService.getDocumentTypes().toPromise();
-      const genders = await this.apiCoinkService.getGenders().toPromise();
+      const documentTypes = await lastValueFrom(this.apiCoinkService.getDocumentTypes())
+      const genders = await lastValueFrom(this.apiCoinkService.getGenders());
 
       this.documentTypes = documentTypes;
       this.genders = genders;
@@ -59,7 +62,7 @@ export class RegisterPage implements OnInit {
 
       this.initForm();
     } catch (error) {
-      console.error('Error cargando datos', error);
+      console.error('Error cargando datos', JSON.stringify(error));
       await this.presentToast('Error al cargar los datos. Por favor, intenta de nuevo.');
     } finally {
       loading.dismiss();
