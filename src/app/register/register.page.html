@@ -22,26 +22,17 @@
         </h4>
         <p>Ahora necesitamos saber algunos datos tuyos</p>
       </div>
-
     </div>
     <span></span>
     <div class="info">Documento de identidad</div>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <ion-list>
-        <!-- <ion-item>
-          <ion-select formControlName="tipoDocumento" label="Tipo de documento" label-placement="floating"
-            interface="popover" placeholder="Tipo de documento">
-
-            @for (doc of documentTypes; track doc.id) {
-              <ion-select-option value={{doc.description}}>{{doc.description}}</ion-select-option>
-            }
-          </ion-select>
-        </ion-item> -->
         <ion-item>
-          <ion-select label="Floating label" label-placement="floating">
-            <ion-select-option value="apple">Apple</ion-select-option>
-            <ion-select-option value="banana">Banana</ion-select-option>
-            <ion-select-option value="orange">Orange</ion-select-option>
+          <ion-select formControlName="tipoDocumento" label="Tipo de documento" label-placement="floating"
+            interface="action-sheet" placeholder="Tipo de documento">
+            <ion-select-option *ngFor="let doc of documentTypes" [value]="doc.id">
+              {{doc.description}}
+            </ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item
@@ -78,13 +69,14 @@
       </ion-item>
 
       <ion-list>
-        <!-- <ion-item>
-          <ion-select formControlName="genero" label="Genero" label-placement="floating" interface="popover"
-            placeholder="Genero">
-            <ion-select-option value="apples">Femenino</ion-select-option>
-            <ion-select-option value="oranges">Masculino</ion-select-option>
+        <ion-item>
+          <ion-select formControlName="genero" label="Género" label-placement="floating" interface="action-sheet"
+            placeholder="Género">
+            <ion-select-option *ngFor="let gen of genders" [value]="gen.id">
+              {{gen.description}}
+            </ion-select-option>
           </ion-select>
-        </ion-item> -->
+        </ion-item>
         <ion-item *ngIf="registerForm.get('genero')?.errors?.['required'] && registerForm.get('genero')?.touched">
           <label color="danger">El género es requerido</label>
         </ion-item>
@@ -153,5 +145,4 @@
   }">SIGUIENTE</button>
     </form>
   </div>
-
 </ion-content>

@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
 import { ApiCoinkService } from '../service/api-coink.service';
 import { Router, RouterLink } from '@angular/router';
-import { IonDatetime } from '@ionic/angular/standalone';
 import { NavigationMenuComponent } from '../Components/navigation-menu/navigation-menu.component';
-
 
 @Component({
   selector: 'app-register',
@@ -24,62 +22,74 @@ import { NavigationMenuComponent } from '../Components/navigation-menu/navigatio
 })
 export class RegisterPage implements OnInit {
 
-
   registerForm!: FormGroup;
   alertButtons = ['Action'];
   documentTypes: Array<any> = [];
+  genders: Array<any> = [];
 
   constructor(
     private fb: FormBuilder, 
     private router: Router, 
     private apiCoinkService: ApiCoinkService,
-   
-    )
-    {}
+    private loadingController: LoadingController,
+    private toastController: ToastController
+  ) {}
 
-  ngOnInit() {
-    // this.registerForm = this.fb.group({
-    //   tipoDocumento: ['', Validators.required],
-    //   numeroDocumento: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    //   fechaExpedicion: ['', Validators.required],
-    //   fechaNacimiento: ['', Validators.required],
-    //   genero: ['', Validators.required],
-    //   correoElectronico: ['', [Validators.required, Validators.email]],
-    //   confirmarCorreo: ['', [Validators.required, Validators.email]],
-    //   pinSeguridad: ['', [Validators.required, Validators.maxLength(5), Validators.pattern('^[0-9]+$')]],
-    //   confirmarPinSeguridad: ['', [Validators.required, Validators.maxLength(5), Validators.pattern('^[0-9]+$')]]
-    // }, {
-    //   validator: [this.mustMatch('correoElectronico', 'confirmarCorreo'), 
-    //   this.mustMatch('pinSeguridad', 'confirmarPinSeguridad')]
-    // });
-    
+  async ngOnInit() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando datos...'
+    });
+    await loading.present();
 
+    try {
+      const documentTypes = await this.apiCoinkService.getDocumentTypes().toPromise();
+      const genders = await this.apiCoinkService.getGenders().toPromise();
 
+      this.documentTypes = documentTypes;
+      this.genders = genders;
 
-    //Peticion a la api cuando se renderiza la pagina
-    // this.apiCoinkService.getDocumentTypes().subscribe(data => {
-    //   this.documentTypes = data;
-    //   console.log('Datos de documentos de indentidad',data);
-    // })
-    // this.apiCoinkService.getGenders().subscribe(data => {
-    //   console.log( 'Datos de genero',data)
-    // })
+      console.log('Datos de documentos de identidad:', JSON.stringify(documentTypes));
+      console.log('Datos de género:', JSON.stringify(genders));
+
+      this.initForm();
+    } catch (error) {
+      console.error('Error cargando datos', error);
+      await this.presentToast('Error al cargar los datos. Por favor, intenta de nuevo.');
+    } finally {
+      loading.dismiss();
+    }
+  }
+
+  initForm() {
+    this.registerForm = this.fb.group({
+      tipoDocumento: ['', Validators.required],
+      numeroDocumento: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      fechaExpedicion: ['', Validators.required],
+      fechaNacimiento: ['', Validators.required],
+      genero: ['', Validators.required],
+      correoElectronico: ['', [Validators.required, Validators.email]],
+      confirmarCorreo: ['', [Validators.required, Validators.email]],
+      pinSeguridad: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]+$')]],
+      confirmarPinSeguridad: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]+$')]]
+    }, {
+      validators: [this.mustMatch('correoElectronico', 'confirmarCorreo'), 
+                   this.mustMatch('pinSeguridad', 'confirmarPinSeguridad')]
+    });
   }
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.router.navigate(['/contrato'])
+      this.router.navigate(['/contrato']);
       console.log('Formulario válido', this.registerForm.value);
     } else {
       this.markFormGroupTouched(this.registerForm);
+      this.presentToast('Por favor, completa todos los campos correctamente.');
     }
   }
 
-  // Método para marcar todos los controles como tocados (visited)
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();
-
       if (control instanceof FormGroup) {
         this.markFormGroupTouched(control);
       }
@@ -102,6 +112,12 @@ export class RegisterPage implements OnInit {
     };
   }
 
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
 }
-
-
