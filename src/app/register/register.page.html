@@ -28,7 +28,7 @@
     <div class="info">Documento de identidad</div>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <ion-list>
-        <ion-item>
+        <!-- <ion-item>
           <ion-select formControlName="tipoDocumento" label="Tipo de documento" label-placement="floating"
             interface="popover" placeholder="Tipo de documento">
 
@@ -36,7 +36,7 @@
               <ion-select-option value={{doc.description}}>{{doc.description}}</ion-select-option>
             }
           </ion-select>
-        </ion-item>
+        </ion-item> -->
         <ion-item>
           <ion-select label="Floating label" label-placement="floating">
             <ion-select-option value="apple">Apple</ion-select-option>
@@ -78,13 +78,13 @@
       </ion-item>
 
       <ion-list>
-        <ion-item>
+        <!-- <ion-item>
           <ion-select formControlName="genero" label="Genero" label-placement="floating" interface="popover"
             placeholder="Genero">
             <ion-select-option value="apples">Femenino</ion-select-option>
             <ion-select-option value="oranges">Masculino</ion-select-option>
           </ion-select>
-        </ion-item>
+        </ion-item> -->
         <ion-item *ngIf="registerForm.get('genero')?.errors?.['required'] && registerForm.get('genero')?.touched">
           <label color="danger">El género es requerido</label>
         </ion-item>

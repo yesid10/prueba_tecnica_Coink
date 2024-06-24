@@ -32,36 +32,38 @@ export class RegisterPage implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private router: Router, 
-    private apiCoinkService: ApiCoinkService
+    private apiCoinkService: ApiCoinkService,
+   
     )
     {}
 
   ngOnInit() {
-    this.registerForm = this.fb.group({
-      tipoDocumento: ['', Validators.required],
-      numeroDocumento: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      fechaExpedicion: ['', Validators.required],
-      fechaNacimiento: ['', Validators.required],
-      genero: ['', Validators.required],
-      correoElectronico: ['', [Validators.required, Validators.email]],
-      confirmarCorreo: ['', [Validators.required, Validators.email]],
-      pinSeguridad: ['', [Validators.required, Validators.maxLength(5), Validators.pattern('^[0-9]+$')]],
-      confirmarPinSeguridad: ['', [Validators.required, Validators.maxLength(5), Validators.pattern('^[0-9]+$')]]
-    }, {
-      validator: [this.mustMatch('correoElectronico', 'confirmarCorreo'), 
-      this.mustMatch('pinSeguridad', 'confirmarPinSeguridad')]
-    });
+    // this.registerForm = this.fb.group({
+    //   tipoDocumento: ['', Validators.required],
+    //   numeroDocumento: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    //   fechaExpedicion: ['', Validators.required],
+    //   fechaNacimiento: ['', Validators.required],
+    //   genero: ['', Validators.required],
+    //   correoElectronico: ['', [Validators.required, Validators.email]],
+    //   confirmarCorreo: ['', [Validators.required, Validators.email]],
+    //   pinSeguridad: ['', [Validators.required, Validators.maxLength(5), Validators.pattern('^[0-9]+$')]],
+    //   confirmarPinSeguridad: ['', [Validators.required, Validators.maxLength(5), Validators.pattern('^[0-9]+$')]]
+    // }, {
+    //   validator: [this.mustMatch('correoElectronico', 'confirmarCorreo'), 
+    //   this.mustMatch('pinSeguridad', 'confirmarPinSeguridad')]
+    // });
+    
 
 
 
     //Peticion a la api cuando se renderiza la pagina
-    this.apiCoinkService.getDocumentTypes().subscribe(data => {
-      this.documentTypes = data;
-      console.log('Datos de documentos de indentidad',data);
-    })
-    this.apiCoinkService.getGenders().subscribe(data => {
-      console.log( 'Datos de genero',data)
-    })
+    // this.apiCoinkService.getDocumentTypes().subscribe(data => {
+    //   this.documentTypes = data;
+    //   console.log('Datos de documentos de indentidad',data);
+    // })
+    // this.apiCoinkService.getGenders().subscribe(data => {
+    //   console.log( 'Datos de genero',data)
+    // })
   }
 
   onSubmit() {
