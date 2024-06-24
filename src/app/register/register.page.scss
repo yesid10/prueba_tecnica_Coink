@@ -2,7 +2,9 @@ ion-icon {
   color: #1EEB00;
 }
 .container {
+ 
   padding: 20px;
+
 }
 
 ion-title {
@@ -91,6 +93,21 @@ button{
     margin-top: .2rem;
 
   }
+}
+
+.spinner{
+  // display: flex;
+  // justify-content: center;
+  // position: absolute;
+  // top: -5rem;
+  // width: 10rem;
+  // height: 5rem;
+  // z-index: 100;
+  width: 10rem;
+  position: relative;
+  top: 50vh;
+  z-index: 101;
+  left: 7rem;
 }
 
 

@@ -42,9 +42,6 @@ export class RegisterPage implements OnInit {
     this.loadData();
   }
 
-  // onLoadDataClick(){
-  //   this.loadData();
-  // }
   async loadData(){
     // const loading = await this.loadingController.create({
     //   message: 'Cargando datos...'
@@ -58,9 +55,10 @@ export class RegisterPage implements OnInit {
     })
 
     try {
+      this.isLoading = true;
       const documentTypes = await lastValueFrom(this.apiCoinkService.getDocumentTypes())
       const genders = await lastValueFrom(this.apiCoinkService.getGenders());
-
+      this.isLoading = false;
       this.documentTypes = documentTypes;
       this.genders = genders;
 
@@ -73,7 +71,6 @@ export class RegisterPage implements OnInit {
       // await this.presentToast('Error al cargar los datos. Por favor, intenta de nuevo.');
     } finally {
       // loading.dismiss();
-      this.isLoading=false;
     }
   }
 
