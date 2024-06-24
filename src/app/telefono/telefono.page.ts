@@ -91,9 +91,14 @@ export class TelefonoPage implements OnInit {
     this.validatePhoneNumber();
     if(this.isPhoneNumberValid){
       console.log('Número de teléfono ingresado:', this.phoneNumber);
+      this.route.navigate(['/register'], {
+        queryParams:{
+          phoneNumber: this.phoneNumber
+        }
+      })
       this.phoneNumber = '';
       this.isPhoneNumberValid = false;
-      this.route.navigate(['/register'])
+      
     }else{
       console.log('Número de teléfono no válido');
     }

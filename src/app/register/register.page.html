@@ -2,7 +2,7 @@
   <ion-toolbar slot="start">
     <ion-title>DATOS DE CUENTA</ion-title>
     <ion-buttons slot="start">
-      <ion-button [disabled]="!registerForm.valid" [routerLink]="['/telefono']">
+      <ion-button [disabled]="!registerForm" [routerLink]="['/telefono']">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -12,6 +12,9 @@
   </ion-toolbar>
 </ion-header>
 
+<div class="spinner" >
+  <ion-spinner style="width: 10rem; height: 4rem;" *ngIf="isLoading"></ion-spinner>
+</div>
 <ion-content>
   <div class="container">
     <div class="icon_Oink">
@@ -28,7 +31,7 @@
     <div class="info">Documento de identidad</div>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <ion-list>
-        <ion-item>
+        <!-- <ion-item>
           <ion-select formControlName="tipoDocumento" label="Tipo de documento" label-placement="floating"
             interface="popover" placeholder="Tipo de documento">
 
@@ -36,20 +39,31 @@
               <ion-select-option value={{doc.description}}>{{doc.description}}</ion-select-option>
             }
           </ion-select>
-        </ion-item>
+        </ion-item> -->
+        
+        <div class="selects">
+          <label for="tipoDocumento">Tipo de documento</label>
+          
+          <select *ngIf="!isLoading && documentTypes && documentTypes.length>0" formControlName="tipoDocumento" id="tipoDocumento" placeholder="Tipo de documento">
+            @for (doc of documentTypes; track doc.id) {
+              <option [value]="doc.description">{{doc.description}}</option>
+            }
+          </select>
+          <ion-spinner *ngIf=""></ion-spinner>
+        </div>
         <ion-item
           *ngIf="registerForm.get('tipoDocumento')?.errors?.['required'] && registerForm.get('tipoDocumento')?.touched">
-          <label color="danger">El tipo de documento es requerido</label>
+          <label>El tipo de documento es requerido</label>
         </ion-item>
       </ion-list>
 
       <ion-item>
-        <ion-input type="number" formControlName="numeroDocumento" label="Número de documento" labelPlacement="floating"
+        <ion-input  type="number" formControlName="numeroDocumento" label="Número de documento" labelPlacement="floating"
           placeholder="Número de documento"></ion-input>
       </ion-item>
       <ion-item
         *ngIf="registerForm.get('numeroDocumento')?.errors?.['required'] && registerForm.get('numeroDocumento')?.touched">
-        <label color="danger">El número de documento es requerido</label>
+        <label>El número de documento es requerido</label>
       </ion-item>
 
       <ion-item>
@@ -58,7 +72,7 @@
       </ion-item>
       <ion-item
         *ngIf="registerForm.get('fechaExpedicion')?.errors?.['required'] && registerForm.get('fechaExpedicion')?.touched">
-        <label color="danger">La fecha de expedición es requerida</label>
+        <label>La fecha de expedición es requerida</label>
       </ion-item>
 
       <ion-item>
@@ -67,19 +81,27 @@
       </ion-item>
       <ion-item
         *ngIf="registerForm.get('fechaNacimiento')?.errors?.['required'] && registerForm.get('fechaNacimiento')?.touched">
-        <label color="danger">La fecha de nacimiento es requerida</label>
+        <label>La fecha de nacimiento es requerida</label>
       </ion-item>
 
       <ion-list>
-        <ion-item>
+        <!-- <ion-item>
           <ion-select formControlName="genero" label="Genero" label-placement="floating" interface="popover"
             placeholder="Genero">
             <ion-select-option value="apples">Femenino</ion-select-option>
             <ion-select-option value="oranges">Masculino</ion-select-option>
           </ion-select>
-        </ion-item>
+        </ion-item> -->
+
+        <div class="selects">
+          <label for="genero">Genero</label>
+          <select id="genero" formControlName="genero" placeholder="yesid">
+            <option value="Femenino">Femenino</option>
+            <option value="Masculino">Masculino</option>
+          </select>
+        </div>
         <ion-item *ngIf="registerForm.get('genero')?.errors?.['required'] && registerForm.get('genero')?.touched">
-          <label color="danger">El género es requerido</label>
+          <label>El género es requerido</label>
         </ion-item>
       </ion-list>
 
@@ -91,11 +113,11 @@
       </ion-item>
       <ion-item
         *ngIf="registerForm.get('correoElectronico')?.errors?.['required'] && registerForm.get('correoElectronico')?.touched">
-        <label color="danger">El correo electrónico es requerido</label>
+        <label>El correo electrónico es requerido</label>
       </ion-item>
       <ion-item
         *ngIf="registerForm.get('correoElectronico')?.errors?.['email'] && registerForm.get('correoElectronico')?.touched">
-        <label color="danger">Formato de correo electrónico incorrecto</label>
+        <label>Formato de correo electrónico incorrecto</label>
       </ion-item>
 
       <ion-item>
@@ -104,15 +126,15 @@
       </ion-item>
       <ion-item
         *ngIf="registerForm.get('confirmarCorreo')?.errors?.['required'] && registerForm.get('confirmarCorreo')?.touched">
-        <label color="danger">La confirmación del correo es requerida</label>
+        <label>La confirmación del correo es requerida</label>
       </ion-item>
       <ion-item
         *ngIf="registerForm.get('confirmarCorreo')?.errors?.['email'] && registerForm.get('confirmarCorreo')?.touched">
-        <label color="danger">Formato de correo electrónico incorrecto</label>
+        <label>Formato de correo electrónico incorrecto</label>
       </ion-item>
       <ion-item
         *ngIf="registerForm.get('confirmarCorreo')?.errors?.['mustMatch'] && registerForm.get('confirmarCorreo')?.touched">
-        <label color="danger">Los correos electrónicos no coinciden</label>
+        <label>Los correos electrónicos no coinciden</label>
       </ion-item>
 
       <ion-item>
@@ -123,7 +145,7 @@
       </ion-item>
       <ion-item
         *ngIf="registerForm.get('pinSeguridad')?.errors?.['required'] && registerForm.get('pinSeguridad')?.touched">
-        <label color="danger">El PIN de seguridad es requerido</label>
+        <label>El PIN de seguridad es requerido</label>
       </ion-item>
 
       <ion-item>
@@ -134,14 +156,14 @@
       </ion-item>
       <ion-item
         *ngIf="registerForm.get('confirmarPinSeguridad')?.errors?.['required'] && registerForm.get('confirmarPinSeguridad')?.touched">
-        <label color="danger">La confirmación del PIN es requerida</label>
+        <label>La confirmación del PIN es requerida</label>
       </ion-item>
       <ion-item
         *ngIf="registerForm.get('confirmarPinSeguridad')?.errors?.['mustMatch'] && registerForm.get('confirmarPinSeguridad')?.touched">
-        <label color="danger">Los PINs de seguridad no coinciden</label>
+        <label>Los PINs de seguridad no coinciden</label>
       </ion-item>
 
-      <button type="submit" [disabled]="!registerForm.valid" [ngStyle]="{'background-color': registerForm.valid === true ? '#1EEB00' : '#EEEEEE',
+      <button type="submit" [disabled]="!registerForm" [ngStyle]="{'background-color': registerForm.valid === true ? '#1EEB00' : '#EEEEEE',
     'color': registerForm.valid === true ? '#004B40' : '#757575'
   }">SIGUIENTE</button>
     </form>

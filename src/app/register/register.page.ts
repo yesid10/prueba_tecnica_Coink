@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
 import { ApiCoinkService } from '../service/api-coink.service';
-import { Router, RouterLink } from '@angular/router';
-import { IonDatetime } from '@ionic/angular/standalone';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavigationMenuComponent } from '../Components/navigation-menu/navigation-menu.component';
-
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -24,60 +23,91 @@ import { NavigationMenuComponent } from '../Components/navigation-menu/navigatio
 })
 export class RegisterPage implements OnInit {
 
-
   registerForm!: FormGroup;
-  alertButtons = ['Action'];
   documentTypes: Array<any> = [];
+  genders: Array<any> = [];
+  phoneNumber!: '';
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder, 
     private router: Router, 
-    private apiCoinkService: ApiCoinkService
-    )
-    {}
+    private apiCoinkService: ApiCoinkService,
+    private loadingController: LoadingController,
+    private toastController: ToastController,
+    private route: ActivatedRoute,
+  ) {this.initForm();}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.loadData();
+  }
+
+  async loadData(){
+    // const loading = await this.loadingController.create({
+    //   message: 'Cargando datos...'
+    // });
+    // await loading.present();
+    this.isLoading=true;
+    this.documentTypes=[];
+
+    this.route.queryParams.subscribe(params =>{
+      this.phoneNumber = params['phoneNumber'] || '';
+    })
+
+    try {
+      this.isLoading = true;
+      const documentTypes = await lastValueFrom(this.apiCoinkService.getDocumentTypes())
+      const genders = await lastValueFrom(this.apiCoinkService.getGenders());
+      this.isLoading = false;
+      this.documentTypes = documentTypes;
+      this.genders = genders;
+
+      console.log('Datos de documentos de identidad:', JSON.stringify(documentTypes));
+      console.log('Datos de género:', JSON.stringify(genders));
+
+      this.initForm();
+    } catch (error) {
+      console.error('Error cargando datos', JSON.stringify(error));
+      // await this.presentToast('Error al cargar los datos. Por favor, intenta de nuevo.');
+    } finally {
+      // loading.dismiss();
+    }
+  }
+
+  initForm() {
     this.registerForm = this.fb.group({
       tipoDocumento: ['', Validators.required],
-      numeroDocumento: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      numeroDocumento: ['', [Validators.required, Validators.minLength(0),Validators.maxLength(10), Validators.pattern('^[0-9]{10}$')]],
       fechaExpedicion: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
       genero: ['', Validators.required],
       correoElectronico: ['', [Validators.required, Validators.email]],
       confirmarCorreo: ['', [Validators.required, Validators.email]],
-      pinSeguridad: ['', [Validators.required, Validators.maxLength(5), Validators.pattern('^[0-9]+$')]],
-      confirmarPinSeguridad: ['', [Validators.required, Validators.maxLength(5), Validators.pattern('^[0-9]+$')]]
+      pinSeguridad: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]{4}$')]],
+      confirmarPinSeguridad: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]{4}$')]]
     }, {
-      validator: [this.mustMatch('correoElectronico', 'confirmarCorreo'), 
-      this.mustMatch('pinSeguridad', 'confirmarPinSeguridad')]
+      validators: [this.mustMatch('correoElectronico', 'confirmarCorreo'), 
+                   this.mustMatch('pinSeguridad', 'confirmarPinSeguridad')]
     });
-
-
-
-    //Peticion a la api cuando se renderiza la pagina
-    this.apiCoinkService.getDocumentTypes().subscribe(data => {
-      this.documentTypes = data;
-      console.log('Datos de documentos de indentidad',data);
-    })
-    this.apiCoinkService.getGenders().subscribe(data => {
-      console.log( 'Datos de genero',data)
-    })
   }
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.router.navigate(['/contrato'])
-      console.log('Formulario válido', this.registerForm.value);
+      const dataComplete ={
+        ...this.registerForm.value,
+        NumTelefono: this.phoneNumber
+      }
+      this.router.navigate(['/contrato']);
+      console.log('Datos Usuario: ', dataComplete);
     } else {
       this.markFormGroupTouched(this.registerForm);
+      // this.presentToast('Por favor, completa todos los campos correctamente.');
     }
   }
 
-  // Método para marcar todos los controles como tocados (visited)
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();
-
       if (control instanceof FormGroup) {
         this.markFormGroupTouched(control);
       }
@@ -100,6 +130,12 @@ export class RegisterPage implements OnInit {
     };
   }
 
+  // async presentToast(message: string) {
+  //   const toast = await this.toastController.create({
+  //     message: message,
+  //     duration: 3000,
+  //     position: 'bottom'
+  //   });
+  //   toast.present();
+  // }
 }
-
-
