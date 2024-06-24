@@ -8,43 +8,41 @@ ion-title {
   text-align: center;
   font-weight: bold;
 }
-
-.content {
+.container_tel{
   display: flex;
-  width: 100%;
-  height: 100%;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
-  text-align: center;
   padding: 20px;
 }
-
+.icon_Oink{
+  display: flex;
+  margin-top: 1.5rem;
+  gap: 2rem;
+}
 .logo {
   width: 80px;
   height: 80px;
   margin-bottom: 20px;
 }
 
-.instruction {
+p{
+  color: #757575;
   font-size: 18px;
-  font-family: 'Montserrat', sans-serif;
+
 }
 
-
-.phone-input {
-  width: 100%;
-  font-size: 24px;
-  text-align: center;
-}
 
 .number-pad {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 7rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 2rem;
+  padding: 1rem;
+  width: 100%; 
+  margin: 0 auto;
 }
+
+
 
 .number-button {
   display: flex;
@@ -56,10 +54,6 @@ ion-title {
   font-weight: bold;
 }
 
-.icon_Oink {
-  display: flex;
-  flex-direction: row;
-}
 
 span {
   display: flex;
@@ -72,8 +66,14 @@ span {
 
 ion-input{
   display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  text-align: center;
+  font-size: 26px;
+  color: #AAAAAA;
   margin-bottom: 5rem;
+  --padding-top: 1rem;
+  --padding-bottom: 1rem;
+  box-shadow: rgba(112, 112, 112, 0.228) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }

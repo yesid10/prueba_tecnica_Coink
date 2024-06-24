@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
 import { Network } from '@capacitor/network';
 import { NavController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,31 +13,18 @@ import { NavController, ToastController } from '@ionic/angular';
 })
 export class HomePage {
   constructor(
-    private navCtrl: NavController,
-    private toastCtrl: ToastController
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.checkConnectionAndNavigate();
+    setTimeout(() => {
+      this.router.navigate(['/ingreso'])
+    }, 3000);
+
   }
   ionViewWillEnter(){
-    this.checkConnectionAndNavigate();
-  }
-
-  async checkConnectionAndNavigate() {
-    const status = await Network.getStatus();
-
-    if (status.connected) {
-      // Si hay conexión, navega a la siguiente página
-      this.navCtrl.navigateForward('/ingreso');
-    } else {
-      // Si no hay conexión, muestra un mensaje de error
-      const toast = await this.toastCtrl.create({
-        message: 'No hay conexión a internet. Por favor, verifica tu conexión e intenta nuevamente.',
-        duration: 5000,
-        position: 'bottom'
-      });
-      toast.present();
-    }
+    setTimeout(() => {
+      this.router.navigate(['/ingreso'])
+    }, 3000);
   }
 }

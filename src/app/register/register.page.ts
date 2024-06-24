@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
 import { ApiCoinkService } from '../service/api-coink.service';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavigationMenuComponent } from '../Components/navigation-menu/navigation-menu.component';
 
 @Component({
@@ -25,20 +25,27 @@ export class RegisterPage implements OnInit {
   registerForm!: FormGroup;
   documentTypes: Array<any> = [];
   genders: Array<any> = [];
+  phoneNumber!: '';
 
   constructor(
     private fb: FormBuilder, 
     private router: Router, 
     private apiCoinkService: ApiCoinkService,
     private loadingController: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private route: ActivatedRoute,
   ) {this.initForm();}
 
   async ngOnInit() {
+
     const loading = await this.loadingController.create({
       message: 'Cargando datos...'
     });
     await loading.present();
+
+    this.route.queryParams.subscribe(params =>{
+      this.phoneNumber = params['phoneNumber'] || '';
+    })
 
     try {
       const documentTypes = await this.apiCoinkService.getDocumentTypes().toPromise();
@@ -62,14 +69,14 @@ export class RegisterPage implements OnInit {
   initForm() {
     this.registerForm = this.fb.group({
       tipoDocumento: ['', Validators.required],
-      numeroDocumento: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      numeroDocumento: ['', [Validators.required, Validators.minLength(0),Validators.maxLength(10), Validators.pattern('^[0-9]{10}$')]],
       fechaExpedicion: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
       genero: ['', Validators.required],
       correoElectronico: ['', [Validators.required, Validators.email]],
       confirmarCorreo: ['', [Validators.required, Validators.email]],
-      pinSeguridad: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]+$')]],
-      confirmarPinSeguridad: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]+$')]]
+      pinSeguridad: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]{4}$')]],
+      confirmarPinSeguridad: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern('^[0-9]{4}$')]]
     }, {
       validators: [this.mustMatch('correoElectronico', 'confirmarCorreo'), 
                    this.mustMatch('pinSeguridad', 'confirmarPinSeguridad')]
@@ -78,8 +85,12 @@ export class RegisterPage implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      const dataComplete ={
+        ...this.registerForm.value,
+        NumTelefono: this.phoneNumber
+      }
       this.router.navigate(['/contrato']);
-      console.log('Formulario válido', this.registerForm.value);
+      console.log('Datos Usuario: ', dataComplete);
     } else {
       this.markFormGroupTouched(this.registerForm);
       this.presentToast('Por favor, completa todos los campos correctamente.');
