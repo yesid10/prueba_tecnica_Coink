@@ -53,10 +53,9 @@ npm install
 ```
 Ejecución en el Navegador
 Para ejecutar la aplicación en el navegador, usa:
-
-bash
-Copiar código
+```bash
 ionic serve
+```
 Construcción del Proyecto
 Para construir el proyecto, usa:
 
