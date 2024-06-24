@@ -50,54 +50,60 @@ Necesitas tener instalados:
 git clone https://github.com/tuusuario/coink-app.git
 cd coink-app
 npm install
-
+```
 Ejecución en el Navegador
 Para ejecutar la aplicación en el navegador, usa:
-
-bash
-Copiar código
+```bash
 ionic serve
+```
 Construcción del Proyecto
 Para construir el proyecto, usa:
 
-bash
-Copiar código
+```bash
+
 ionic build
+```
 Desplegar en un Dispositivo o Emulador
 Android
 Añadir la plataforma Android:
 
-bash
-Copiar código
+```bash
+
 npx cap add android
+```
 Sincronizar el proyecto con Capacitor:
 
-bash
-Copiar código
+```bash
+
 npx cap sync
+```
 Abrir Android Studio:
 
-bash
-Copiar código
+```bash
+
 npx cap open android
+```
 En Android Studio, construye y corre la aplicación en un dispositivo o emulador.
 
 iOS
 Añadir la plataforma iOS:
 
-bash
-Copiar código
+```bash
+
 npx cap add ios
+```
 Sincronizar el proyecto con Capacitor:
 
-bash
-Copiar código
+```bash
+
 npx cap sync
+```
 Abrir Xcode:
 
-bash
-Copiar código
+```bash
+
 npx cap open ios
+```
 En Xcode, construye y corre la aplicación en un dispositivo o simulador.
 
 Generar APK para Android
