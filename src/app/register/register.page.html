@@ -2,7 +2,7 @@
   <ion-toolbar slot="start">
     <ion-title>DATOS DE CUENTA</ion-title>
     <ion-buttons slot="start">
-      <ion-button [disabled]="!registerForm?.valid" [routerLink]="['/telefono']">
+      <ion-button [disabled]="!registerForm" [routerLink]="['/telefono']">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -157,7 +157,7 @@
         <label>Los PINs de seguridad no coinciden</label>
       </ion-item>
 
-      <button type="submit" [disabled]="!registerForm?.valid" [ngStyle]="{'background-color': registerForm.valid === true ? '#1EEB00' : '#EEEEEE',
+      <button type="submit" [disabled]="!registerForm" [ngStyle]="{'background-color': registerForm.valid === true ? '#1EEB00' : '#EEEEEE',
     'color': registerForm.valid === true ? '#004B40' : '#757575'
   }">SIGUIENTE</button>
     </form>
