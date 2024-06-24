@@ -1,18 +1,30 @@
 <div class="navigation-menu">
-  <button  [routerLink]="['/telefono']"  [ngStyle]="{'border': currentPage === 'telefono' ? '2.1px solid #1EEB00' : '2.1px solid #757575'}">
-    <button class="interno" [ngStyle]="{'background-color': currentPage === 'telefono' ? '#1EEB00' : '#757575',
-    'display': currentPage=== 'telefono' ? 'block' : 'none'} "></button>
+  <button  
+  [routerLink]="['/telefono']"  
+  [ngStyle]="{'border': currentPage === 'telefono' || currentPage==='registro' || currentPage ==='contrato' ? '2.1px solid #1EEB00' : '2.1px solid #757575'}"
+  [disabled]="currentPage === 'registro' || currentPage === 'contrato'"
+  >
+    <button class="interno" [ngStyle]="{'background-color': currentPage === 'telefono' || currentPage==='registro' || currentPage ==='contrato' ? '#1EEB00' : '#757575',
+    'display': currentPage=== 'telefono' || currentPage==='registro' || currentPage ==='contrato' ? 'block' : 'none'} "></button>
     <!-- <ion-icon name="arrow-back-outline"></ion-icon> -->
   </button>
   <span></span>
-  <button  [routerLink]="['/register']"  [ngStyle]="{'border': currentPage === 'registro' ? '2.1px solid #1EEB00' : '2.1px solid #757575'}">
-    <button class="interno"  [ngStyle]="{'background-color': currentPage === 'registro' ? '#1EEB00' : '#757575',
-  'display': currentPage=== 'registro' ? 'block' : 'none'}"></button>
+  <button  
+  [routerLink]="['/register']"  
+  [ngStyle]="{'border': currentPage === 'registro' || currentPage === 'contrato' ? '2.1px solid #1EEB00' : '2.1px solid #757575'}"
+  [disabled]="currentPage === 'telefono' || currentPage === 'contrato'"
+  >
+    <button class="interno"  [ngStyle]="{'background-color': currentPage === 'registro' || currentPage === 'contrato' ? '#1EEB00' : '#757575',
+  'display': currentPage=== 'registro' || currentPage === 'contrato' ? 'block' : 'none'}"></button>
     <!-- <ion-icon name="document-text-outline"></ion-icon> -->
   </button>
 
   <span></span>
-  <button  [routerLink]="['/contrato']"  [ngStyle]="{'border': currentPage === 'contrato' ? '2.1px solid #1EEB00' : '2.1px solid #757575'}">
+  <button  
+  [routerLink]="['/contrato']"  
+  [ngStyle]="{'border': currentPage === 'contrato' ? '2.1px solid #1EEB00' : '2.1px solid #757575'}"
+  [disabled]="currentPage==='registro' || currentPage==='telefono'"
+  >
     <button class="interno"  [ngStyle]="{'background-color': currentPage === 'contrato' ? '#1EEB00' : '#757575',
   'display': currentPage=== 'contrato' ? 'block' : 'none' }"></button>
     <!-- <ion-icon name="document-text-outline"></ion-icon> -->
