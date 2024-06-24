@@ -1,0 +1,54 @@
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.icon_Oink {
+    display: flex;
+    width: 80%;
+    height: 55%;
+    padding: 1rem 2rem;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    box-shadow: rgba(120, 122, 123, 0.12) 0px 2px 4px 0px, rgba(155, 158, 159, 0.32) 0px 2px 16px 0px;
+    border-radius: 20px;
+}
+
+p {
+    font-family: 'Avenir LT Pro', sans-serif;
+    color: #212121;
+    font-size: 18px;
+
+}
+
+
+h4 {
+    color: #004B40;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+
+button {
+    display: flex;
+    width: 100%;
+    margin-top:.5rem;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 1rem 5rem;
+    border-radius: 100px;
+    box-shadow: #1EEA004D 0px 3px 8px;
+    background-color: #1EEA00;
+    color:#004B40;
+}
+
