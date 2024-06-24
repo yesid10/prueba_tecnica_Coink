@@ -74,9 +74,8 @@
         <ion-item>
           <ion-select formControlName="genero" label="Genero" label-placement="floating" interface="popover"
             placeholder="Genero">
-            <ion-select-option value="apples">Apples</ion-select-option>
-            <ion-select-option value="oranges">Oranges</ion-select-option>
-            <ion-select-option value="bananas">Bananas</ion-select-option>
+            <ion-select-option value="apples">Femenino</ion-select-option>
+            <ion-select-option value="oranges">Masculino</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item *ngIf="registerForm.get('genero')?.errors?.['required'] && registerForm.get('genero')?.touched">
