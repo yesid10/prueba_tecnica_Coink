@@ -37,6 +37,13 @@
             }
           </ion-select>
         </ion-item>
+        <ion-item>
+          <ion-select label="Floating label" label-placement="floating">
+            <ion-select-option value="apple">Apple</ion-select-option>
+            <ion-select-option value="banana">Banana</ion-select-option>
+            <ion-select-option value="orange">Orange</ion-select-option>
+          </ion-select>
+        </ion-item>
         <ion-item
           *ngIf="registerForm.get('tipoDocumento')?.errors?.['required'] && registerForm.get('tipoDocumento')?.touched">
           <label color="danger">El tipo de documento es requerido</label>
