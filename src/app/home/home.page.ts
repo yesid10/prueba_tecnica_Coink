@@ -23,6 +23,8 @@ export class HomePage {
     this.checkConnectionAndNavigate();
   }
 
+  
+
   async checkConnectionAndNavigate() {
     const status = await Network.getStatus();
 
