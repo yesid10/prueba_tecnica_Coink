@@ -1,7 +1,7 @@
 # Bienvenidos a Coink App!
 <div align="center">
   <a target="_blank" href="https://coink-app.web.app">
-    <img alt="Coink App" title="Coink App" src="https://res.cloudinary.com/villalbad10/image/upload/v1661975934/ddbcol/bgtext_laksji.png" />
+    <img alt="Coink App" title="Coink App" src="./src/assets/icon/Oink.svg" />
   </a>
 </div>
 <div align="center">
@@ -26,8 +26,8 @@
 Colores utilizados:
 | Color           | Hex                                                                     |
 | --------------- | ----------------------------------------------------------------------- |
-| Primary Color   | ![#e1b12c](https://via.placeholder.com/15/e1b12c/e1b12c.png) #e1b12c    |
-| Secondary Color | ![#0B4654](https://via.placeholder.com/15/0B4654/0B4654.png) #0B4654    |
+| Primary Color   | ![#1EEA00](https://via.placeholder.com/15/1EEA00/1EEA00.png) #1EEA00    |
+| Secondary Color | ![#004B40](https://via.placeholder.com/15/004B40/004B40.png) #004B40    |
 
 ## 🦾 Tecnologías
 - [Ionic](https://ionicframework.com/)
@@ -50,3 +50,59 @@ Necesitas tener instalados:
 git clone https://github.com/tuusuario/coink-app.git
 cd coink-app
 npm install
+
+Ejecución en el Navegador
+Para ejecutar la aplicación en el navegador, usa:
+
+bash
+Copiar código
+ionic serve
+Construcción del Proyecto
+Para construir el proyecto, usa:
+
+bash
+Copiar código
+ionic build
+Desplegar en un Dispositivo o Emulador
+Android
+Añadir la plataforma Android:
+
+bash
+Copiar código
+npx cap add android
+Sincronizar el proyecto con Capacitor:
+
+bash
+Copiar código
+npx cap sync
+Abrir Android Studio:
+
+bash
+Copiar código
+npx cap open android
+En Android Studio, construye y corre la aplicación en un dispositivo o emulador.
+
+iOS
+Añadir la plataforma iOS:
+
+bash
+Copiar código
+npx cap add ios
+Sincronizar el proyecto con Capacitor:
+
+bash
+Copiar código
+npx cap sync
+Abrir Xcode:
+
+bash
+Copiar código
+npx cap open ios
+En Xcode, construye y corre la aplicación en un dispositivo o simulador.
+
+Generar APK para Android
+Abre Android Studio con el proyecto como se describió anteriormente.
+Selecciona Build > Build Bundle(s) / APK(s) > Build APK(s).
+Una vez completado, encontrarás el APK en android/app/build/outputs/apk/debug/ o release/ dependiendo de la configuración de compilación.
+Muestra tu apoyo
+¡Dale un ⭐️ al repositorio si te gustó!
