@@ -19,6 +19,9 @@ export class HomePage {
   ngOnInit() {
     this.checkConnectionAndNavigate();
   }
+  ionViewWillEnter(){
+    this.checkConnectionAndNavigate();
+  }
 
   async checkConnectionAndNavigate() {
     const status = await Network.getStatus();
