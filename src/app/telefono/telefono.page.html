@@ -12,42 +12,37 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="content">
-    <div class="icon_Oink">
-      <img src="../../assets/icon/Oink.svg" class="logo" alt="Logo" />
-      <p class="instruction">
-        Para comenzar, por favor ingresa <strong>tu número celular.</strong>
-      </p>
-    </div>
-    <span></span>
-    <div class="input-container">
-      <ion-input style="box-shadow: rgba(112, 112, 112, 0.228) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;" 
-      [value]="phoneNumber" readonly placeholder="(XXX - XXXXXX)" 
-      class="phone-input"></ion-input>
-    </div>
-    <div class="error-message" *ngIf="!isPhoneNumberValid && phoneNumber.length > 0">
-      El número de teléfono debe tener 10 caracteres.
-    </div>
 
-
-    <div class="number-pad">
-
-      @for (number of numbers; track number.id) {
-      <button class="number-button" (click)="addNumber(number.value)">{{number.value}}</button>
-      }
-      <button (click)="deleteNumber()" class="number-button">
-        <ion-icon style="color: #004B40; font-size: 3rem; margin-left: -.1rem;" name="backspace-outline"></ion-icon>
-      </button>
-      <button (click)="addNumber(0)" class="number-button">0</button>
-      <button 
-      [disabled]="!isPhoneNumberValid" 
-      style="height: 3rem; width: 3rem; border-radius: 50%;" 
-      [ngStyle]="{'background-color': isPhoneNumberValid === true ? '#1EEB00' : '#757575'}"
-      (click)="submitNumber()"
-        class="number-button">
-        <ion-icon style="color: #fff;" name="checkmark-outline" ></ion-icon>
-      </button>
-    </div>
+<div class="content">
+  <div class="icon_Oink">
+    <img src="../../assets/icon/Oink.svg" class="logo" alt="Logo" />
+    <p class="instruction">
+      Para comenzar, por favor ingresa <strong>tu número celular.</strong>
+    </p>
   </div>
-</ion-content>
+  <span></span>
+  <div class="input-container">
+    <ion-input style="box-shadow: rgba(112, 112, 112, 0.228) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;"
+      [value]="phoneNumber" readonly placeholder="(XXX - XXXXXX)" class="phone-input"></ion-input>
+  </div>
+  <div class="error-message" *ngIf="!isPhoneNumberValid && phoneNumber.length > 0">
+    El número de teléfono debe tener 10 caracteres.
+  </div>
+
+
+  <div class="number-pad">
+
+    @for (number of numbers; track number.id) {
+    <button class="number-button" (click)="addNumber(number.value)">{{number.value}}</button>
+    }
+    <button (click)="deleteNumber()" class="number-button">
+      <ion-icon style="color: #004B40; font-size: 3rem; margin-left: -.1rem;" name="backspace-outline"></ion-icon>
+    </button>
+    <button (click)="addNumber(0)" class="number-button">0</button>
+    <button [disabled]="!isPhoneNumberValid" style="height: 3rem; width: 3rem; border-radius: 50%;"
+      [ngStyle]="{'background-color': isPhoneNumberValid === true ? '#1EEB00' : '#757575'}" (click)="submitNumber()"
+      class="number-button">
+      <ion-icon style="color: #fff;" name="checkmark-outline"></ion-icon>
+    </button>
+  </div>
+</div>

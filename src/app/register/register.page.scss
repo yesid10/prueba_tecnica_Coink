@@ -71,4 +71,26 @@ button{
   box-shadow: #1EEA004D 0px 3px 8px;
 }
 
+.selects{
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+
+  label{
+    color: #efefef;
+    font-size: 17px;
+    margin: .5rem .7rem;
+
+  }
+
+  select{
+    background-color: transparent;
+    border: none;
+    padding-bottom: .2rem;
+    padding-left: 1rem;
+    margin-top: .2rem;
+
+  }
+}
+
 
